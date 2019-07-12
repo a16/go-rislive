@@ -11,7 +11,7 @@
 
 ### Usage
 
-See [examples](https://github.com/a16/go-rislive/examples).
+See [examples](examples).
 
 
 ### Note
