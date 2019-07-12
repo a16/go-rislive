@@ -9,7 +9,7 @@ import (
 	"os"
 	"time"
 
-	rislive "bitbucket.org/a16/go-rislive/pkg/message"
+	rislive "github.com/a16/go-rislive/pkg/message"
 	"github.com/sirupsen/logrus"
 )
 
