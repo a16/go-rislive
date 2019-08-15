@@ -137,6 +137,10 @@ func (f *Filter) SetPeer(ip string) {
 	f.Peer = ip
 }
 
+func (f *Filter) SetPath(path string) {
+	f.Path = path
+}
+
 func (f *Filter) SetPrefix(prefix string, moreSpecific, lessSpecific bool) {
 	f.Prefix = prefix
 	f.MoreSpecific = moreSpecific
