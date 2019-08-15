@@ -29,6 +29,14 @@ func (m *RisLiveMessage) UnmarshalJSON(buf []byte) error {
 		return err
 	}
 	switch m.Type {
+	case "ris_subscribe":
+		// To Be Implemented
+	case "ris_unsubscribe":
+		// To Be Implemented
+	case "request_rrc_list":
+		m.Data = nil
+	case "ping":
+		m.Data = nil
 	case "ris_message":
 		l := map[string]json.RawMessage{}
 		if err := json.Unmarshal(a.Data, &l); err != nil {
@@ -88,6 +96,83 @@ func (m *RisLiveMessage) UnmarshalJSON(buf []byte) error {
 	}
 	//DebugOutput(m)
 	return nil
+}
+
+type Filter struct {
+	Host          string            `json:"host,omitempty"`
+	Type          string            `json:"type,omitempty"`
+	Require       string            `json:"require,omitempty"`
+	Peer          string            `json:"peer,omitempty"`
+	Path          string            `json:"path,omitempty"`
+	Prefix        string            `json:"prefix,omitempty"`
+	MoreSpecific  bool              `json:"moreSpecific,omitempty"`
+	LessSpecific  bool              `json:"lessSpecific,omitempty"`
+	SocketOptions *RisSocketOptions `json:"socketOptions,omitempty"`
+}
+
+type RisSocketOptions struct {
+	IncludeRaw bool `json:"includeRaw,omitempty"`
+}
+
+func NewFilter() *Filter {
+	return &Filter{}
+}
+
+func (f *Filter) Dummy() {
+}
+
+func (f *Filter) SetHost(rrc string) {
+	f.Host = rrc
+}
+
+func (f *Filter) SetType(msgType string) {
+	f.Type = msgType
+}
+
+func (f *Filter) SetRequire(key string) {
+	f.Require = key
+}
+
+func (f *Filter) SetPeer(ip string) {
+	f.Peer = ip
+}
+
+func (f *Filter) SetPrefix(prefix string, moreSpecific, lessSpecific bool) {
+	f.Prefix = prefix
+	f.MoreSpecific = moreSpecific
+	f.LessSpecific = lessSpecific
+}
+
+func (f *Filter) SetSocketOptions(includeRaw bool) {
+	f.SocketOptions = &RisSocketOptions{
+		IncludeRaw: includeRaw,
+	}
+}
+
+func NewRisSubscribe(filter *Filter) *RisLiveMessage {
+	return &RisLiveMessage{
+		Type: "ris_subscribe",
+		Data: filter,
+	}
+}
+
+func NewRisUnsubscribe(filter *Filter) *RisLiveMessage {
+	return &RisLiveMessage{
+		Type: "ris_unsubscribe",
+		Data: filter,
+	}
+}
+
+func NewRisRequestRrcList() *RisLiveMessage {
+	return &RisLiveMessage{
+		Type: "request_rrc_list",
+	}
+}
+
+func NewRisPing() *RisLiveMessage {
+	return &RisLiveMessage{
+		Type: "ping",
+	}
 }
 
 type RisMessageInterface interface {
