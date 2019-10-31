@@ -10,6 +10,12 @@ import (
 type RisLiveMessage struct {
 	Type       string                  `json:"type"`
 	BgpMsgType string                  `json:"-"`
+	Timestamp  float64                 `json:"-"`
+	Peer       string                  `json:"-"`
+	PeerASN    string                  `json:"-"`
+	ID         string                  `json:"-"`
+	Host       string                  `json:"-"`
+	Raw        string                  `json:"-"`
 	Data       RisLiveMessageInterface `json:"data,omitempty"`
 }
 
@@ -43,6 +49,12 @@ func (m *RisLiveMessage) UnmarshalJSON(buf []byte) error {
 			return err
 		}
 		m.BgpMsgType, _ = strconv.Unquote(string(l["type"]))
+		m.Timestamp, _ = strconv.ParseFloat(string(l["timestamp"]), 64)
+		m.Peer, _ = strconv.Unquote(string(l["peer"]))
+		m.PeerASN, _ = strconv.Unquote(string(l["peer_asn"]))
+		m.ID, _ = strconv.Unquote(string(l["id"]))
+		m.Host, _ = strconv.Unquote(string(l["host"]))
+		m.Raw, _ = strconv.Unquote(string(l["raw"]))
 		switch m.BgpMsgType {
 		case "OPEN":
 			var o RisMessageOpen
