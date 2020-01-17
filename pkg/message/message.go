@@ -257,6 +257,7 @@ type Announcement struct {
 type RisError struct {
 	CommandType string `json:"command_type"`
 	Message     string `json:"message"`
+	BufferSize  uint64 `json:"bufferSize",omitempty"`
 }
 
 func (m RisError) Dummy() {
