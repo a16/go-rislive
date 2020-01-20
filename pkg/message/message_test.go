@@ -17,6 +17,7 @@ var examples = []struct {
 	ID                    string
 	Raw                   string
 	Host                  string
+	State                 string
 	ReceivedMsg           string
 	ExpectedRawBGPMessage string
 }{
@@ -30,6 +31,7 @@ var examples = []struct {
 		Raw:         "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF004F01041AD200B4C30E986532020601040002000102028000020202000206410400001AD202084006007800020100020E050C000100010002000100020002",
 		Host:        "rrc01",
 		BgpMsgType:  "OPEN",
+		State:       "",
 		ReceivedMsg: `{
 			"type": "ris_message",
 			"data": {
@@ -91,6 +93,7 @@ var examples = []struct {
 		Raw:         "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF006A020004148D8820002F400101004002160205000070F500000CB9000005130004155D000402ED400304C3D0D093C0080870F50FA070F50FA318B1177418B1177718B1177018A879C518B1260D18A879C718B1260A18B1260F",
 		Host:        "rrc13",
 		BgpMsgType:  "UPDATE",
+		State:       "",
 		ReceivedMsg: `{
 			"type": "ris_message",
 			"data": {
@@ -120,6 +123,7 @@ var examples = []struct {
 		Raw:         "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0015030605",
 		Host:        "rrc00",
 		BgpMsgType:  "NOTIFICATION",
+		State:       "",
 		ReceivedMsg: `{
 			"type": "ris_message",
 			"data": {
@@ -149,6 +153,7 @@ var examples = []struct {
 		Raw:         "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF001304",
 		Host:        "rrc01",
 		BgpMsgType:  "KEEPALIVE",
+		State:       "",
 		ReceivedMsg: `{
 			"type": "ris_message",
 			"data": {
@@ -170,8 +175,10 @@ var examples = []struct {
 		Peer:        "2001:43f8:6d0::55",
 		PeerASN:     "327991",
 		ID:          "2001:43f8:6d0::55-1562823052.55-1007659",
+		Raw:         "",
 		Host:        "rrc19",
 		BgpMsgType:  "RIS_PEER_STATE",
+		State:       "connected",
 		ReceivedMsg: `{
 			"type": "ris_message",
 			"data": {
@@ -192,8 +199,10 @@ var examples = []struct {
 		Peer:        "",
 		PeerASN:     "",
 		ID:          "",
+		Raw:         "",
 		Host:        "",
 		BgpMsgType:  "",
+		State:       "",
 		ReceivedMsg: `{
 			"type": "ris_rrc_list",
 			"data": [
@@ -209,8 +218,10 @@ var examples = []struct {
 		Peer:        "",
 		PeerASN:     "",
 		ID:          "",
+		Raw:         "",
 		Host:        "",
 		BgpMsgType:  "",
+		State:       "",
 		ReceivedMsg: `{
 			"type": "ris_error",
 			"data": {
@@ -226,10 +237,31 @@ var examples = []struct {
 		Peer:        "",
 		PeerASN:     "",
 		ID:          "",
+		Raw:         "",
 		Host:        "",
 		BgpMsgType:  "",
+		State:       "",
 		ReceivedMsg: `{
 			"type":"pong"
+		}`,
+	},
+	{
+		Description: "Unmarshal ris_error",
+		Type:        "ris_error",
+		Timestamp:   0,
+		Peer:        "",
+		PeerASN:     "",
+		ID:          "",
+		Raw:         "",
+		Host:        "",
+		BgpMsgType:  "",
+		State:       "",
+		ReceivedMsg: `{
+			"type": "ris_error",
+			"data": {
+				"message": "Closing connection after being behind by more than 262144000 bytes over 30 seconds",
+				"bufferSize":313026734
+			}
 		}`,
 	},
 }

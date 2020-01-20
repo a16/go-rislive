@@ -16,6 +16,7 @@ type RisLiveMessage struct {
 	ID         string                  `json:"-"`
 	Host       string                  `json:"-"`
 	Raw        string                  `json:"-"`
+	State      string                  `json:"-"`
 	Data       RisLiveMessageInterface `json:"data,omitempty"`
 }
 
@@ -55,6 +56,7 @@ func (m *RisLiveMessage) UnmarshalJSON(buf []byte) error {
 		m.ID, _ = strconv.Unquote(string(l["id"]))
 		m.Host, _ = strconv.Unquote(string(l["host"]))
 		m.Raw, _ = strconv.Unquote(string(l["raw"]))
+		m.State, _ = strconv.Unquote(string(l["state"]))
 		switch m.BgpMsgType {
 		case "OPEN":
 			var o RisMessageOpen
@@ -204,6 +206,7 @@ type RisMessageCommon struct {
 	ID        string  `json:"id"`
 	Host      string  `json:"host"`
 	Raw       string  `json:"raw,omitempty"`
+	State     string  `json:"state,omitempty"`
 }
 
 func (m RisMessageCommon) Dummy() {}
