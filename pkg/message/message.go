@@ -206,7 +206,6 @@ type RisMessageCommon struct {
 	ID        string  `json:"id"`
 	Host      string  `json:"host"`
 	Raw       string  `json:"raw,omitempty"`
-	State     string  `json:"state,omitempty"`
 }
 
 func (m RisMessageCommon) Dummy() {}
