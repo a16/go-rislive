@@ -212,7 +212,7 @@ type RisMessageCommon struct {
 func (m RisMessageCommon) Dummy() {}
 
 type RisMessageOpen struct {
-	*RisMessageCommon
+	RisMessageCommon
 	Direction    string                         `json:"direction"`
 	RouterID     string                         `json:"router_id"`
 	Version      int                            `json:"version"`
@@ -225,7 +225,7 @@ type CapabilityInterface interface {
 }
 
 type RisMessageUpdate struct {
-	*RisMessageCommon
+	RisMessageCommon
 	Path          []json.RawMessage `json:"path,omitempty"`
 	Communities   [][]uint32        `json:"community,omitempty"`
 	Origin        string            `json:"origin,omitempty"`
@@ -235,7 +235,7 @@ type RisMessageUpdate struct {
 }
 
 type RisMessageNotification struct {
-	*RisMessageCommon
+	RisMessageCommon
 	Notification struct {
 		Code    uint8  `json:"code"`
 		Subcode uint8  `json:"subcode"`
@@ -244,11 +244,11 @@ type RisMessageNotification struct {
 }
 
 type RisMessageKeepalive struct {
-	*RisMessageCommon
+	RisMessageCommon
 }
 
 type RisMessageRisPeerState struct {
-	*RisMessageCommon
+	RisMessageCommon
 	State string `json:"state"`
 }
 
