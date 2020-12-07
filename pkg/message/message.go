@@ -230,7 +230,7 @@ type RisMessageUpdate struct {
 	Origin        string            `json:"origin,omitempty"`
 	MED           uint32            `json:"med,omitempty"`
 	Announcements []Announcement    `json:"announcements,omitempty"`
-	Withdrawals   []string          `json:"withdralwals,omitempty"`
+	Withdrawals   []string          `json:"withdrawals,omitempty"`
 }
 
 type RisMessageNotification struct {
