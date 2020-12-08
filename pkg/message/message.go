@@ -226,7 +226,7 @@ type CapabilityInterface interface {
 type RisMessageUpdate struct {
 	RisMessageCommon
 	Path          []json.RawMessage `json:"path,omitempty"`
-	Communities   [][]uint32        `json:"community,omitempty"`
+	Communities   [][]uint16        `json:"community,omitempty"`
 	Origin        string            `json:"origin,omitempty"`
 	MED           uint32            `json:"med,omitempty"`
 	Announcements []Announcement    `json:"announcements,omitempty"`
