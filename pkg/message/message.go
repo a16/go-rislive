@@ -88,8 +88,6 @@ func (m *RisLiveMessage) UnmarshalJSON(buf []byte) error {
 				return err
 			}
 			m.Data = &r
-		default:
-			return fmt.Errorf("unknown type in ris_message: %s", m.BgpMsgType)
 		}
 	case "ris_error":
 		var re RisError
